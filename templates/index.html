@@ -1,0 +1,72 @@
+<html>
+    <title>
+        CHECKIN
+    </title>
+    <body>
+        <h2>TEAM 1</h2>
+        <div id="one" ></div>
+        <h2>TEAM 2</h2>
+        <div id="two"></div>
+        <br>
+        <br>
+        <form method="POST" action="./">
+            <input name="team" id="inp" type="hidden"></input>
+            <button type="submit"  onClick="reply_click(this.id)"  formaction="./predict" name="on" id="0">TEAM 1 WON</button>
+            <button type="submit" onClick="reply_click(this.id)" formaction="./predict" name="tw" id="1">TEAM 2 WON</button>      
+        </form>
+        <h2>YOUR SCORE :{{you}} </h2>
+        <h2>NET's SCORE : {{ann}}</h2>
+        <h6>thanks to paladins.guru</h6>
+    </body>
+    <script>
+        function reply_click(id)
+        {
+          document.getElementById("inp").value=id;
+        }
+
+        window.addEventListener("load", function()
+        {
+        let dat = {{t|tojson}};
+        let team1 = dat["team1"]
+        let team2 = dat["team2"]
+
+        // DRAW THE HTML TABLE
+        html = "<table border=\"3\"><tr><td>champion</td><td>KDA</td><td>DMG</td><td>SHLD</td></tr><tr>";
+
+        // Loop through array and add table cells
+        for (var i=0; i<5; i++) {
+            for(let j=0;j<team1.length;j++)
+            {
+              html+="<td>"+team1[j][i] + "</td>";
+            }
+            html += "</tr><tr>";
+          }
+        html += "</tr></table></br></br>";
+
+        // ATTACH HTML TO CONTAINER
+        document.getElementById("one").innerHTML = html;
+
+
+
+
+
+
+        // DRAW THE HTML TABLE
+        html = "<table border=\"3\"><tr><td>champion</td><td>KDA</td><td>DMG</td><td>SHLD</td></tr><tr>";
+
+      // Loop through array and add table cells
+        for (var i=0; i<5; i++) {
+            for(let j=0;j<team2.length;j++)
+            {
+              html+="<td>"+team2[j][i] + "</td>";
+            }
+            html += "</tr><tr>";
+          }
+        html += "</tr></table>";
+
+        // ATTACH HTML TO CONTAINER
+        document.getElementById("two").innerHTML = html;
+    }
+    );
+</script>
+</html>
